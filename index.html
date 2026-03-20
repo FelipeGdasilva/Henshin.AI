@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Animebot - Encontre o anime perfeito para você</title>
+    <title>Henshin.AI - Encontre o anime perfeito para você</title>
 
     <link rel="stylesheet" href="src/css/variaveis.css" />
     <link rel="stylesheet" href="src/css/reset.css" />
@@ -12,29 +12,27 @@
     <link rel="stylesheet" href="src/css/animations.css" />
     <link rel="stylesheet" href="src/css/responsivo.css" />
     <link rel="icon" type="image/png" sizes="32x32" href="./public/favicon-32x32.png" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
   </head>
 
   <body>
-    <!-- Background animado -->
     <div class="bg"></div>
     <div class="bg bg2"></div>
     <div class="bg bg3"></div>
 
     <main class="container">
       <div class="main-content">
-        <!-- Header / Brand -->
         <header class="brand-header">
           <div class="container-logo">
             <img
               src="src/images/Assistente robô futurista iluminada.png"
-              alt="Assistente virtual AnimeBot"
+              alt="Assistente virtual Henshin.AI"
               class="robot-image"
             />
-            <h1 class="brand-title">AnimeBot</h1>
+            <h1 class="brand-title">Henshin<span class="ai-suffix">.AI</span></h1>
           </div>
 
           <p class="brand-subtitle">
@@ -42,7 +40,6 @@
           </p>
         </header>
 
-        <!-- Card de busca -->
         <div class="search-card">
           <div class="search-content">
             <div class="input-container">
@@ -54,7 +51,6 @@
               ></textarea>
             </div>
 
-            <!-- Exemplos -->
             <div class="examples">
               <p class="examples-title">Exemplos:</p>
               <ul class="examples-list">
@@ -71,13 +67,11 @@
           </div>
         </div>
 
-        <!-- Resultados -->
         <div id="results">
           <h2>Animes recomendados pra você</h2>
 
           <div id="movies-grid" class="movies-grid">
-            <!-- Cards de anime serão inseridos aqui via JavaScript -->
-          </div>
+            </div>
         </div>
       </div>
     </main>

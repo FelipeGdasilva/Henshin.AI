@@ -1,5 +1,5 @@
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'kanit', sans-serif;
   background: linear-gradient(120deg, #0f0f1a, #1b1b3a);
   color: var(--text-light);
   min-height: 100vh;
@@ -78,12 +78,16 @@ body {
 
 
 /* Brand Title & Subtitle */
-.brand-title {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--primary-color);
+.brand-title .ai-suffix {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 200; /* Peso extra fino que importamos no HTML */
+  font-size: 1.6rem; /* Um pouco menor que o nome principal */
+  color: var(--secondary-color); /* Usa a sua cor secundária das variáveis */
+  letter-spacing: 3px; /* Espaçamento para dar um ar de tecnologia */
+  margin-left: 4px;
+  opacity: 0.8;
+  vertical-align: middle;
 }
-
 .brand-subtitle {
   color: var(--text-muted);
   margin-top: 8px;
