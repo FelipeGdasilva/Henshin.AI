@@ -1,9 +1,11 @@
-// TODO: Substituir localhost pela URL do deploy quando o backend estiver online
 const input = document.getElementById("mood-input");
 const button = document.getElementById("search-button");
 const resultsContainer = document.getElementById("movies-grid");
 const resultsSection = document.getElementById("results");
+const searchCard = document.querySelector(".search-card");
+const assistant = document.querySelector(".assistant-fixed");
 
+// Habilita/Desabilita o botão conforme o texto
 input.addEventListener("input", () => {
   button.disabled = input.value.trim() === "";
 });
@@ -12,34 +14,40 @@ button.addEventListener("click", async () => {
   const userText = input.value.trim();
   if (!userText) return;
 
-  // Estado visual inicial
+  // --- INÍCIO DO HENSHIN SCAN ---
   button.disabled = true;
-  button.innerText = "Buscando..."; 
-  resultsSection.style.display = "block";
+  button.innerHTML = "<span>⚡</span> Escaneando..."; 
+  searchCard.classList.add("scanning"); // Ativa o laser no CSS
+  
+  // Efeito visual na assistente (opcional, mas fica show)
+  if(assistant) {
+    assistant.style.filter = "drop-shadow(0 0 50px #7c5cff) brightness(1.2)";
+  }
 
-  // Limpa resultados anteriores antes de mostrar a mensagem de carregamento
+  resultsSection.style.display = "block";
   resultsContainer.innerHTML = "";
 
-  // Mensagem de Resiliência
+  // Mensagem de Loading estilizada
   resultsContainer.innerHTML = `
     <div id="loading-message" style="grid-column: 1/-1; text-align: center; color: #7c5cff; padding: 20px;">
       <div class="loading"></div>
-      <p style="margin-top: 15px;">🤖 <b>Henshin.AI:</b> Consultando banco de dados resiliente...</p>
+      <p style="margin-top: 15px; font-family: 'Orbitron', sans-serif; letter-spacing: 1px;">
+        🤖 <b>Henshin.AI:</b> Sincronizando com a base de dados...
+      </p>
     </div>
   `;
 
   try {
-    // Consumo de API Local: Porta 3001
+    // Chamada ao seu Backend
     const response = await fetch("http://localhost:3001/animes");
     if (!response.ok) throw new Error("Erro na comunicação com o servidor");
 
     const objetoReal = await response.json();
     
-    // Remove a mensagem de carregamento antes de renderizar
+    // Remove o loading
     const loadingMsg = document.getElementById("loading-message");
     if (loadingMsg) loadingMsg.remove();
 
-    // Tratamento de Dados
     let animesParaRenderizar = [];
     if (objetoReal.animes && Array.isArray(objetoReal.animes)) {
         animesParaRenderizar = objetoReal.animes;
@@ -49,24 +57,37 @@ button.addEventListener("click", async () => {
 
     if (animesParaRenderizar.length > 0) {
       renderAnimes(animesParaRenderizar);
+      // Rola a página suavemente para os resultados
+      resultsSection.scrollIntoView({ behavior: 'smooth' });
     } else {
       resultsContainer.innerHTML = "<p style='color:white; grid-column: 1/-1;'>Nenhum anime encontrado no momento.</p>";
     }
 
   } catch (error) {
-    resultsContainer.innerHTML = "<p style='color:#ff5fa2; grid-column: 1/-1;'>Erro ao conectar ao Backend. Verifique se o server.js está rodando na porta 3001!</p>";
+    console.error(error);
+    resultsContainer.innerHTML = `
+      <div style="grid-column: 1/-1; color:#ff5fa2; padding: 20px; border: 1px solid #ff5fa2; border-radius: 10px; background: rgba(255, 95, 162, 0.1);">
+        <p><b>ERRO DE CONEXÃO:</b> O Henshin.AI não conseguiu alcançar o servidor.</p>
+        <p style="font-size: 12px; margin-top: 10px;">Verifique se o seu node server.js está rodando na porta 3001.</p>
+      </div>
+    `;
   } finally {
+    // --- FINALIZAÇÃO DO SCAN ---
     button.disabled = false;
-    button.innerText = "Encontrar Animes";
+    button.innerHTML = '<span class="play-icon">▶</span> Encontrar Animes';
+    searchCard.classList.remove("scanning"); // Desliga o laser
+    
+    if(assistant) {
+      assistant.style.filter = "drop-shadow(0 0 20px rgba(124, 92, 255, 0.6))"; // Volta ao brilho normal
+    }
   }
 });
 
 function renderAnimes(animes) {
   animes.forEach((anime) => {
     const card = document.createElement("div");
-    card.classList.add("movie-card", "fade-in");
+    card.classList.add("movie-card");
 
-    // Fallback de imagem
     const imageSource = anime.image && anime.image.trim() !== "" 
       ? anime.image 
       : "https://via.placeholder.com/300x450?text=Henshin+AI";

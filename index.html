@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Henshin.AI - Encontre o anime perfeito para você</title>
 
     <link rel="stylesheet" href="src/css/variaveis.css" />
@@ -19,22 +18,21 @@
   </head>
 
   <body>
+    <img 
+      src="src/images/Henshin.Ai-Asa.png" 
+      alt="Henshin AI Assistente" 
+      class="assistant-fixed"
+    >
+
     <div class="bg"></div>
     <div class="bg bg2"></div>
     <div class="bg bg3"></div>
 
     <main class="container">
       <div class="main-content">
+        
         <header class="brand-header">
-          <div class="container-logo">
-            <img
-              src="src/images/Assistente robô futurista iluminada.png"
-              alt="Assistente virtual Henshin.AI"
-              class="robot-image"
-            />
-            <h1 class="brand-title">Henshin<span class="ai-suffix">.AI</span></h1>
-          </div>
-
+          <h1 class="brand-title">Henshin<span class="ai-suffix">.AI</span></h1>
           <p class="brand-subtitle">
             Seu assistente pessoal para encontrar o anime perfeito
           </p>
@@ -43,6 +41,7 @@
         <div class="search-card">
           <div class="search-content">
             <div class="input-container">
+            <div class="scan-line"></div> <div class="search-content"></div>
               <textarea
                 id="mood-input"
                 rows="3"
@@ -69,9 +68,7 @@
 
         <div id="results">
           <h2>Animes recomendados pra você</h2>
-
-          <div id="movies-grid" class="movies-grid">
-            </div>
+          <div id="movies-grid" class="movies-grid"></div>
         </div>
       </div>
     </main>
