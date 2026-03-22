@@ -1,4 +1,4 @@
-![Henshin.AI Demo](./henshin.ai-demostração.gif)
+![Henshin.AI Demo](./screenshots/henshin.ai-demostração.gif)
 
 # 🦸‍♂️ Henshin.AI - Inteligência Adaptativa para Animes
 
@@ -12,7 +12,7 @@ Um dos pontos altos deste projeto foi o processo de **refatoração e amadurecim
 
 | Versão Anterior (AnimeBot) | Versão Atual (Henshin.AI) |
 | :--- | :--- |
-| ![Antes](./screenshots/animebot-antigo.gif) | ![Depois](./henshin.ai-demostração.gif) |
+| ![Antes](./screenshots/demonstração-animebot-antigo.gif) | ![Depois](./henshin.ai-demonstração.gif) |
 | **Foco:** Automação via n8n e interface básica. | **Foco:** Back-end em Node.js, Design System Moderno e Imersão. |
 | **Visual:** Cores sólidas e animações de preenchimento. | **Visual:** Background tecnológico (Cenário), Blur (Glassmorphism) e Títulos em Neon. |
 
