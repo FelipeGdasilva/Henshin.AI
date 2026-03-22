@@ -4,21 +4,11 @@ body {
   color: var(--text-light);
   min-height: 100vh;
   overflow-x: hidden;
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
-              linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-  background-size: 100% 4px, 3px 100%;
-  pointer-events: none; 
-  z-index: 10;
-  opacity: 0.3;
+  background-image: url('/src/images/cenario.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .container {
@@ -28,7 +18,12 @@ body::after {
   margin: 0 auto;
 }
 
-
+h1 { 
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8), 
+                 0 0 20px rgba(124, 92, 255, 0.4); 
+    font-weight: bold;
+}
 .main-content {
   width: 100%;
   min-height: 100vh;
@@ -74,7 +69,6 @@ body::after {
 .search-card {
   margin-top: auto;   
   margin-bottom: auto; 
-  
   background: var(--card-bg);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
@@ -193,12 +187,13 @@ body::after {
 }
 
 #results h2 {
-  font-family: 'Kanit', sans-serif; 
-  font-size: 1.8rem;
-  color: var(--text-light);
-  margin-bottom: 30px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  color: #ffffff;
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8), 0 0 15px rgba(124, 92, 255, 0.5); 
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
 }
 .movies-grid {
   display: grid;
@@ -206,16 +201,49 @@ body::after {
   gap: 28px;
   padding: 20px 0;
 }
-
-/* --- EFEITO DE SCAN (VARREDURA) --- */
-.search-card {
-  position: relative; /* Necessário para a linha ficar presa ao card */
-  overflow: hidden;    /* Garante que a linha não saia das bordas arredondadas */
+.movie-card {
+    background: rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    padding: 20px;
+    margin: 10px;
+    transition: transform 0.3s ease;
 }
 
-/* A linha de laser */
+.movie-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
+    border: 5px solid rgba(124, 92, 255, 0.4);
+}
+
+.movie-card img {
+    max-width: 100%; 
+    height: auto;    
+    display: block; 
+    margin: 0 auto;  
+}
+
+.movie-card p {
+    color: #2d1b4d; 
+    font-size: 0.9rem; 
+}
+
+.movie-title{
+  color: #2d1b4d; 
+    font-size: 0.9rem; 
+}
+
+.search-card {
+  position: relative; 
+  overflow: hidden;    
+}
+
+
 .scan-line {
-  display: none; /* Escondida por padrão */
+  display: none; 
   position: absolute;
   top: 0;
   left: 0;
@@ -227,24 +255,15 @@ body::after {
   opacity: 0.7;
 }
 
-/* Quando a classe 'scanning' for adicionada, a linha aparece e move */
+
 .search-card.scanning .scan-line {
   display: block;
   animation: scanMove 2s linear infinite;
 }
 
-@keyframes scanMove {
-  0% { top: 0%; }
-  100% { top: 100%; }
-}
-
-/* Feedback visual no textarea durante o scan */
 .search-card.scanning .mood-input {
   border-color: var(--primary-color);
   background: rgba(0, 242, 254, 0.05);
   transition: all 0.3s ease;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
