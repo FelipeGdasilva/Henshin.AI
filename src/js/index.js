@@ -5,7 +5,7 @@ const resultsSection = document.getElementById("results");
 const searchCard = document.querySelector(".search-card");
 const assistant = document.querySelector(".assistant-fixed");
 
-// Habilita/Desabilita o botão conforme o texto
+
 input.addEventListener("input", () => {
   button.disabled = input.value.trim() === "";
 });
@@ -14,12 +14,12 @@ button.addEventListener("click", async () => {
   const userText = input.value.trim();
   if (!userText) return;
 
-  // --- INÍCIO DO HENSHIN SCAN ---
+ 
   button.disabled = true;
   button.innerHTML = "<span>⚡</span> Escaneando..."; 
-  searchCard.classList.add("scanning"); // Ativa o laser no CSS
+  searchCard.classList.add("scanning"); 
   
-  // Efeito visual na assistente (opcional, mas fica show)
+  
   if(assistant) {
     assistant.style.filter = "drop-shadow(0 0 50px #7c5cff) brightness(1.2)";
   }
@@ -27,7 +27,7 @@ button.addEventListener("click", async () => {
   resultsSection.style.display = "block";
   resultsContainer.innerHTML = "";
 
-  // Mensagem de Loading estilizada
+ 
   resultsContainer.innerHTML = `
     <div id="loading-message" style="grid-column: 1/-1; text-align: center; color: #7c5cff; padding: 20px;">
       <div class="loading"></div>
@@ -38,13 +38,13 @@ button.addEventListener("click", async () => {
   `;
 
   try {
-    // Chamada ao seu Backend
+    
     const response = await fetch("http://localhost:3001/animes");
     if (!response.ok) throw new Error("Erro na comunicação com o servidor");
 
     const objetoReal = await response.json();
     
-    // Remove o loading
+    
     const loadingMsg = document.getElementById("loading-message");
     if (loadingMsg) loadingMsg.remove();
 
@@ -57,7 +57,7 @@ button.addEventListener("click", async () => {
 
     if (animesParaRenderizar.length > 0) {
       renderAnimes(animesParaRenderizar);
-      // Rola a página suavemente para os resultados
+     
       resultsSection.scrollIntoView({ behavior: 'smooth' });
     } else {
       resultsContainer.innerHTML = "<p style='color:white; grid-column: 1/-1;'>Nenhum anime encontrado no momento.</p>";
@@ -72,13 +72,13 @@ button.addEventListener("click", async () => {
       </div>
     `;
   } finally {
-    // --- FINALIZAÇÃO DO SCAN ---
+    
     button.disabled = false;
     button.innerHTML = '<span class="play-icon">▶</span> Encontrar Animes';
-    searchCard.classList.remove("scanning"); // Desliga o laser
+    searchCard.classList.remove("scanning"); 
     
     if(assistant) {
-      assistant.style.filter = "drop-shadow(0 0 20px rgba(124, 92, 255, 0.6))"; // Volta ao brilho normal
+      assistant.style.filter = "drop-shadow(0 0 20px rgba(124, 92, 255, 0.6))"; 
     }
   }
 });
