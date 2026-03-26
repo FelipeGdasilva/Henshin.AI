@@ -67,6 +67,7 @@ h1 {
 }
 
 .search-card {
+  position: relative;
   margin-top: auto;   
   margin-bottom: auto; 
   background: var(--card-bg);
@@ -215,8 +216,8 @@ h1 {
 
 .movie-card:hover {
     transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.08);
-    border: 5px solid rgba(124, 92, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15); 
+    border: 2px solid var(--primary-color); 
 }
 
 .movie-card img {
@@ -232,8 +233,13 @@ h1 {
 }
 
 .movie-title{
-  color: #2d1b4d; 
-    font-size: 0.9rem; 
+    color: #2d1b4d; 
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .search-card {
