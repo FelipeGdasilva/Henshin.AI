@@ -7,7 +7,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// --- NOVO: Rota de Boas-vindas para testar o servidor ---
 app.get('/', (req, res) => {
     res.send('<h1>Henshin.AI API</h1><p>O sistema de resiliência está online!</p>');
 });
@@ -24,7 +23,7 @@ app.get('/animes', (req, res) => {
             const jsonSaida = JSON.parse(data);
             res.json(jsonSaida);
         } catch (parseErr) {
-            console.error("❌ Erro de sintaxe no JSON:", parseErr); // Ajuda no debug
+            console.error("❌ Erro de sintaxe no JSON:", parseErr); 
             res.status(500).json({ mensagem: "Erro no formato do banco de dados local" });
         }
     });
