@@ -33,12 +33,7 @@
     opacity: 1;
   }
   
-  .robot-image {
-    width: 50px;
-    height: auto;
-    transition: all 0.3s ease;
-  }
-  
+
   .brand-title {
     font-size: 64px;
   }
