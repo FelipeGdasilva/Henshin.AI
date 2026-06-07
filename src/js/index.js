@@ -5,7 +5,6 @@ const resultsSection = document.getElementById("results");
 const searchCard = document.querySelector(".search-card");
 const assistant = document.querySelector(".assistant-fixed");
 
-
 input.addEventListener("input", () => {
   button.disabled = input.value.trim() === "";
 });
@@ -14,20 +13,17 @@ button.addEventListener("click", async () => {
   const userText = input.value.trim();
   if (!userText) return;
 
- 
   button.disabled = true;
   button.innerHTML = "<span>⚡</span> Escaneando..."; 
   searchCard.classList.add("scanning"); 
   
-  
-  if(assistant) {
+  if (assistant) {
     assistant.style.filter = "drop-shadow(0 0 50px #7c5cff) brightness(1.2)";
   }
 
   resultsSection.style.display = "block";
   resultsContainer.innerHTML = "";
 
- 
   resultsContainer.innerHTML = `
     <div id="loading-message" style="grid-column: 1/-1; text-align: center; color: #7c5cff; padding: 20px;">
       <div class="loading"></div>
@@ -38,12 +34,17 @@ button.addEventListener("click", async () => {
   `;
 
   try {
-    
-    const response = await fetch("http://localhost:3001/animes");
+    const response = await fetch("http://localhost:3001/animebot", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ chatInput: userText }) 
+    });
+
     if (!response.ok) throw new Error("Erro na comunicação com o servidor");
 
     const objetoReal = await response.json();
-    
     
     const loadingMsg = document.getElementById("loading-message");
     if (loadingMsg) loadingMsg.remove();
@@ -57,7 +58,6 @@ button.addEventListener("click", async () => {
 
     if (animesParaRenderizar.length > 0) {
       renderAnimes(animesParaRenderizar);
-     
       resultsSection.scrollIntoView({ behavior: 'smooth' });
     } else {
       resultsContainer.innerHTML = "<p style='color:white; grid-column: 1/-1;'>Nenhum anime encontrado no momento.</p>";
@@ -72,12 +72,11 @@ button.addEventListener("click", async () => {
       </div>
     `;
   } finally {
-    
     button.disabled = false;
     button.innerHTML = '<span class="play-icon">▶</span> Encontrar Animes';
     searchCard.classList.remove("scanning"); 
     
-    if(assistant) {
+    if (assistant) {
       assistant.style.filter = "drop-shadow(0 0 20px rgba(124, 92, 255, 0.6))"; 
     }
   }
@@ -88,21 +87,22 @@ function renderAnimes(animes) {
     const card = document.createElement("div");
     card.classList.add("movie-card");
 
-    const imageSource = anime.image && anime.image.trim() !== "" 
-      ? anime.image 
-      : "https://via.placeholder.com/300x450?text=Henshin+AI";
+    // 💡 Ajustado para mapear os campos da API do Jikan (title, synopsis, images)
+    const imageSource = anime.images?.jpg?.large_image_url || anime.image || "https://via.placeholder.com/300x450?text=Henshin+AI";
+    const title = anime.title || "Título Indisponível";
+    const description = anime.synopsis || anime.description || "Descrição em breve...";
 
     card.innerHTML = `
       <div class="movie-poster">
         <img 
           src="${imageSource}" 
-          alt="Poster de ${anime.title || 'Anime'}" 
+          alt="Poster de ${title}" 
           onerror="this.onerror=null; this.src='https://via.placeholder.com/300x450?text=Erro+ao+Carregar';"
         >
       </div>
       <div class="movie-info">
-        <h3 class="movie-title">${anime.title || "Título Indisponível"}</h3>
-        <p class="movie-overview">${anime.description || "Descrição em breve..."}</p>
+        <h3 class="movie-title">${title}</h3>
+        <p class="movie-overview">${description}</p>
       </div>
     `;
     
