@@ -57,7 +57,7 @@ app.get('/animes', (req, res) => {
 });
  
 
-const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
+const genAI = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
 
 
 app.post('/animebot', async (req, res) => {
@@ -67,7 +67,7 @@ app.post('/animebot', async (req, res) => {
 
     const prompt = `Você é a Hina, uma assistente de IA fã de animes e boxeadora. O usuário disse: "${chatInput}". Sugira exatamente 3 animes reais que combinem com o estado emocional dele. Devolva APENAS os nomes dos animes separados por vírgula, sem numeração, sem aspas e sem pontos finais. Exemplo: Naruto, Bleach, One Piece`;
 
-    const result = await ai.models.generateContent({ model: 'gemini-2.5-flash', contents: prompt });
+    const result = await genAI.models.generateContent({ model: 'gemini-2.5-flash', contents: prompt });
     const responseText = result.text;
 
     const nomesDosAnimes = responseText.split(',').map(nome => nome.replace(/["']/g, "").trim());
