@@ -64,22 +64,34 @@ Diferente de buscadores comuns, o **Henshin.AI** foca na experiência humana. El
 
 ---
 
-tem como você corrigir esse também ## 👨‍💻 Como Executar o Projeto
+## 👨‍💻 Como Executar o Projeto
+
 1. **Clone o repositório:**
    ```bash
-   git clone [https://github.com/FelipeGdasilva/Henshin.AI.git]
+   git clone https://github.com/FelipeGdasilva/Henshin.AI.git
    cd Henshin.AI
    ```
-   2. **Configure o arquivo .env no diretório do Back-end:
-   Crie um arquivo .env dentro da pasta do backend e insira sua chave da API do Google:
 
-    GOOGLE_API_KEY=sua_chave_aqui
+2. **Instale as dependências do back-end:**
+   ```bash
+   cd backend
+   npm install
    ```
-   3. **Inicie o Servidor de Back-end:
-     cd backend
-     npm install
-     npm start
+
+3. **Configure as variáveis de ambiente:**
+
+   Crie um arquivo `.env` dentro da pasta `backend` e adicione sua chave da API do Google:
+
+   ```env
+   GOOGLE_API_KEY=sua_chave_aqui
    ```
-   4. **Abra o Front-end:
-   Abra o arquivo index.html usando a extensão Live Server do VS Code ou diretamente no seu navegador preferido.
+
+4. **Inicie o servidor do back-end:**
+   ```bash
+   npm start
    ```
+
+5. **Execute o front-end:**
+
+   Abra o arquivo `index.html` utilizando a extensão **Live Server** do VS Code ou diretamente no navegador.
+
