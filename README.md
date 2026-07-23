@@ -64,7 +64,7 @@ Diferente de buscadores comuns, o **Henshin.AI** foca na experiência humana. El
 
 ---
 
-## 👨‍💻 Como Executar o Projeto
+tem como você corrigir esse também ## 👨‍💻 Como Executar o Projeto
 1. **Clone o repositório:**
    ```bash
    git clone [https://github.com/FelipeGdasilva/Henshin.AI.git]
