@@ -4,7 +4,7 @@ body {
   color: var(--text-light);
   min-height: 100vh;
   overflow-x: hidden;
-  background-image: url('/src/images/cenario.png');
+  background-image: url('/public/cenario.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
