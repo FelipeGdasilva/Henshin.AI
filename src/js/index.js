@@ -87,8 +87,15 @@ function renderAnimes(animes) {
     const card = document.createElement("div");
     card.classList.add("movie-card");
 
-    // 💡 Ajustado para mapear os campos da API do Jikan (title, synopsis, images)
-    const imageSource = anime.images?.jpg?.large_image_url || anime.image || "https://via.placeholder.com/300x450?text=Henshin+AI";
+    // Lógica para capturar a imagem ou acionar a Hina Chibi
+    let imageSource = anime.images?.jpg?.large_image_url || anime.images?.jpg?.image_url;
+
+    // Se o backend indicou erro no Jikan ou a imagem veio vazia:
+    // USAMOS '../images/' PARA SAIR DA PASTA JS E ENTRAR NA PASTA IMAGES
+    if (imageSource === "MOSTRAR_HINA_ERRO" || !imageSource) {
+      imageSource = "./src/images/hina-erro.png"; 
+    }
+
     const title = anime.title || "Título Indisponível";
     const description = anime.synopsis || anime.description || "Descrição em breve...";
 
@@ -97,7 +104,8 @@ function renderAnimes(animes) {
         <img 
           src="${imageSource}" 
           alt="Poster de ${title}" 
-          onerror="this.onerror=null; this.src='https://via.placeholder.com/300x450?text=Erro+ao+Carregar';"
+          loading="lazy"
+          onerror="this.onerror=null; this.src='../images/hina-erro.png';"
         >
       </div>
       <div class="movie-info">
